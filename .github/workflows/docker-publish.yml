@@ -47,5 +47,5 @@ jobs:
             export MONGO_DB=${{ secrets.MONGO_DB }}
             export MONGO_HOST=${{ secrets.MONGO_HOST }}
             export RABBIT_URL=${{ secrets.RABBIT_URL }}
-            docker stack deploy --compose-file /home/deployer/scheduler/docker-compose.yml podcast-service
+            docker stack deploy --compose-file /home/deployer/scheduler/docker-compose.yml podcast-updater
             rm -rf /home/deployer/scheduler

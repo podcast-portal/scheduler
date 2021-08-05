@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  updater:
-    image: "menoncello/podcast.scheduler"
+  service:
+    image: "menoncello/scheduler"
     environment:
       MONGO_DB: ${MONGO_DB}
       MONGO_HOST: ${MONGO_HOST}
