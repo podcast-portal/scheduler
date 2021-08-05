@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  updater:
+    image: "menoncello/podcast.scheduler"
+    environment:
+      MONGO_DB: ${MONGO_DB}
+      MONGO_HOST: ${MONGO_HOST}
+      RABBIT_URL: ${RABBIT_URL}
+    networks:
+      - backend
+    deploy:
+      mode: replicated
+      replicas: 1
+
+networks:
+  backend:
+    external: true
