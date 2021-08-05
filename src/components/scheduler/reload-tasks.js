@@ -28,7 +28,7 @@ async function load(tasks) {
       task: cron.schedule(schedule.cron, () => {
         console.log(new Date(), 'executing', schedule.name, 'with message', schedule.message)
         executeSchedule(schedule)
-      })
+      }, {})
     }
 
     if (tasks[schedule._id].isEnabled) {

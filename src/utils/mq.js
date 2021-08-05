@@ -30,6 +30,10 @@ class MessageQueue {
   }
 
   async enqueue(queue, value, priority) {
+    if (!this.connection) {
+      await this.connectToServer();
+    }
+
     const channel = await this.connection.createChannel()
     await channel.assertQueue(queue)
     await this.enqueueChannel(channel, queue, value, priority)
