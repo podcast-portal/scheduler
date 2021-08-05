@@ -5,21 +5,7 @@ class MessageQueue {
   connection
 
   async connectToServer() {
-    await watch('connect to rabbit mq',
-      async () => this.connection = await connect(process.env.RABBIT_URL),
-      true)
-  }
-
-  async consume(queue, handler) {
-    if (!this.connection) {
-      await this.connectToServer();
-    }
-
-    const channel = await this.connection.createChannel()
-    await channel.assertQueue(queue)
-
-    channel.prefetch(process.env.PARALLEL_PROCESSES || 5)
-    channel.consume(queue, handler(channel))
+    this.connection = await connect(process.env.RABBIT_URL)
   }
 
   async enqueueChannel(channel, queue, value, priority) {
@@ -31,7 +17,9 @@ class MessageQueue {
 
   async enqueue(queue, value, priority) {
     if (!this.connection) {
-      await this.connectToServer();
+      await watch('connect to rabbit mq',
+          async () => await this.connectToServer(),
+          true)
     }
 
     const channel = await this.connection.createChannel()
