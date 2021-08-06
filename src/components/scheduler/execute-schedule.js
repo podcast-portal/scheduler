@@ -8,5 +8,6 @@ async function executeSchedule (schedule) {
       Buffer.from(JSON.stringify(schedule.message)))
   } catch (e) {
     console.error('ERROR ON EXECUTE SCHEDULE', e)
+    process.exit(1)
   }
 }
