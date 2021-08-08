@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-prod": "node out/index.js"
+    "start-prod": "node out/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
