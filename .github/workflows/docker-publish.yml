@@ -20,7 +20,8 @@ jobs:
 
       - name: Typescript Build
         uses: iCrawl/action-tsc@v1
-
+        with:
+          project: tsconfig.json
       - name: Docker Login
         uses: docker/login-action@v1.10.0
         with:
