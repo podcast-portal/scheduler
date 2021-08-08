@@ -1,8 +1,9 @@
-const { scheduler } = require('./components')
-const { mq } = require('./utils')
+import { scheduler } from './components'
+import { mq } from './utils'
 
 async function execute () {
   try {
+    await mq.connectToServer()
     await scheduler()
   } catch (e) {
     console.error(e)

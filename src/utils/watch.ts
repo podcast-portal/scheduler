@@ -1,7 +1,7 @@
-const Stopwatch = require('statman-stopwatch');
-const logger = require('./logger')
+import { Stopwatch } from 'ts-stopwatch'
+import logger from './logger'
 
-module.exports = watch
+export default watch
 
 async function watch (name, func, doLog) {
   if (typeof name === 'function') {
@@ -9,27 +9,29 @@ async function watch (name, func, doLog) {
     name = 'undefined'
   }
 
-  const sw = new Stopwatch(name, true)
+  const sw = new Stopwatch()
   const startTime = Date()
-
-  if (doLog) {
-    logger.debug({
-      process: 'starting',
-      startTime,
-      info: name
-    }, 'starting %s', name)
-  }
 
   let result
   let error
 
   try {
+    sw.start()
+
+    if (doLog) {
+      logger.debug({
+        process: 'starting',
+        startTime,
+        info: name
+      }, 'starting %s', name)
+    }
+
     result = await func()
   } catch (e) {
     error = e
   } finally {
     sw.stop()
-    const elapsedTime = sw.read()
+    const elapsedTime = sw.getTime()
 
     if (error) {
       logger.error({

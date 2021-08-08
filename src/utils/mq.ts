@@ -1,5 +1,5 @@
-const { connect } = require('amqplib')
-const watch = require('./watch')
+import { connect } from 'amqplib'
+import watch from './watch'
 
 class MessageQueue {
   connection
@@ -15,9 +15,9 @@ class MessageQueue {
         { priority })
   }
 
-  async enqueue(queue, value, priority) {
+  async enqueue(queue, value, priority = null) {
     if (!this.connection) {
-      await watch('connect to rabbit mq',
+      await watch('connect to rabbit _mq',
           async () => await this.connectToServer(),
           true)
     }
@@ -28,6 +28,6 @@ class MessageQueue {
   }
 }
 
-const mq = new MessageQueue();
+const _mq = new MessageQueue();
 
-module.exports = mq
+export default _mq
